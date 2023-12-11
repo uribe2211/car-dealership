@@ -1,5 +1,8 @@
-import { Controller, Get, HttpException, Param,ParseIntPipe, Post,Body,Patch,Delete } from '@nestjs/common';
+import { Controller, Get, HttpException, Param,ParseIntPipe, Post,Body,Patch,Delete, ParseUUIDPipe, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CarsService } from './cars.service';
+import { CreateCarDto } from './DTO/create-car.dto';
+import { create } from 'domain';
+import { UpdateCarDto } from './DTO/update-car.dto';
 
 @Controller('cars')
 export class CarsController {
@@ -12,7 +15,7 @@ export class CarsController {
   }
 
   @Get(':id')
-  getCarById(@Param('id', ParseIntPipe) id: number) {
+  getCarById(@Param('id',ParseUUIDPipe) id: string) {
     const car = this.carService.getCarById(id);
     if (!car) {
       throw new HttpException(`No se encontro el id ${id}`, 404);
@@ -20,14 +23,16 @@ export class CarsController {
     return car;
   }
 
-  @Post()
-  createCar(@Body() body:any) {
-    return body
+  @Post()  
+  createCar(@Body() createCarDTO:CreateCarDto) {
+    return this.carService.createCar(createCarDTO);
   }
 
   @Patch(':id')
-    updateCar(@Param('id', ParseIntPipe) id: number, @Body() body: any) {
-    return body;
+    updateCar(@Param('id', ParseUUIDPipe) id: string, 
+    @Body() UpdateCarDto: UpdateCarDto) {
+      
+    return this.carService.update(id, UpdateCarDto);
   }
 
   @Delete(':id')
