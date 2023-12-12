@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Car } from './Interfaces/car.interface';
+import { Car } from './interfaces/car.interface';
 import { v4 as uuid } from 'uuid'
-import { CreateCarDto, UpdateCarDto } from './DTO';
+import { CreateCarDto, UpdateCarDto } from './dto';
 
 
 @Injectable()
@@ -54,6 +54,12 @@ export class CarsService {
         return carDB;
     }
 
-    
+
+    delete(id:string) {
+        const car= this.getCarById(id);
+        this.cars=this.cars.filter(car => car.id!==id);        
+       return;
+    }
+
 }
 
