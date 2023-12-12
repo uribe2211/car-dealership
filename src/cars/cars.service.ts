@@ -8,10 +8,7 @@ import { CreateCarDto, UpdateCarDto } from './dto';
 export class CarsService {
 
     private cars: Car[] = [
-        { id: uuid(), name: 'BMW', price: 100000 },
-        { id: uuid(), name: 'Audi', price: 200000 },
-        { id: uuid(), name: 'Mercedes', price: 300000 },
-        { id: uuid(), name: 'Mini', price: 400000 },
+        // { id: uuid(), name: 'Mini', price: 400000 },
     ];
 
     getAll() {
@@ -61,5 +58,8 @@ export class CarsService {
        return;
     }
 
+    fillCarsSeedData(cars: Car[]){
+        this.cars=cars;
+    }
 }
 

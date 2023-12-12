@@ -9,10 +9,10 @@ export class BrandsService {
 
   private brands: Brand[] = [
 
-    { id: uuid(), name: 'BMW', createdAt: new Date() },
-    { id: uuid(), name: 'Audi', createdAt: new Date() },
-    { id: uuid(), name: 'Mercedez', createdAt: new Date() },
-    { id: uuid(), name: 'Subaru', createdAt: new Date() },
+    // { id: uuid(), name: 'BMW', createdAt: new Date() },
+    // { id: uuid(), name: 'Audi', createdAt: new Date() },
+    // { id: uuid(), name: 'Mercedez', createdAt: new Date() },
+    // { id: uuid(), name: 'Subaru', createdAt: new Date() },
   ];
 
   create(createBrandDto: CreateBrandDto) {
@@ -49,6 +49,10 @@ export class BrandsService {
 
   remove(id: string) {
     this.brands = this.brands.filter(brand => brand.id!== id);
+  }
+
+  fillDataSeed(brands:Brand[]){
+    this.brands = brands;
   }
 }
 
